@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\Entity\User">
+        <id name="id" type="string" column-definition="CHAR(36) NOT NULL" />
+
+        <field name="name" type="string" length="20"></field>
+        <field name="email" length="100"></field>
+        <field name="createdOn" type="datetime"></field>
+        <field name="updatedOn" type="datetime"></field>
+
+
+        <unique-constraints>
+            <unique-constraint columns="email" name="U_email_user" />
+        </unique-constraints>
+        <indexes>
+            <index columns="name" name="IDX_name_user"/>
+        </indexes>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="preUpdate" method="markAsUpdated"/>
+        </lifecycle-callbacks>
+    </entity>
+</doctrine-mapping>
